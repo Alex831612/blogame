@@ -167,12 +167,15 @@ export default function CategoryPage({ params }: { params: { category: string } 
 }
 
 // Generar parámetros estáticos para todas las categorías
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ params: { category: string } }[]> {
     const categories = getAllCategories();
-    
+
     return categories.map((category) => ({
-        category: encodeURIComponent(category.toLowerCase()),
+        params: {
+            category: encodeURIComponent(category.toLowerCase()),
+        },
     }));
 }
+
 
 export const revalidate = 3600; 
