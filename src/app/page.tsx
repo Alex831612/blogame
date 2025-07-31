@@ -1,103 +1,147 @@
-import Image from "next/image";
+import { Metadata } from 'next';
+import { getAllPosts } from '@/lib/posts';
+import PostCard from '@/components/PostCard';
+import Link from 'next/link';
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+// SEO Metadata
+export const metadata: Metadata = {
+    title: 'BloGame - Artículos y Noticias Recientes',
+    description: 'Explora nuestros últimos artículos sobre noticias, eventos y mucho más. Contenido actualizado regularmente para mantenerte informado.',
+    keywords: ['blog', 'noticias', 'artículos', 'eventos', 'actualidad', 'juegos', 'videojuegos'],
+    authors: [{ name: 'Alex Andres' }],
+    openGraph: {
+        title: 'BloGame - Artículos y Noticias Recientes',
+        description: 'Explora nuestros últimos artículos sobre noticias, eventos y mucho más.',
+        type: 'website',
+        locale: 'es_ES',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'BloGame - Artículos y Noticias Recientes',
+        description: 'Explora nuestros últimos artículos sobre noticias, eventos y mucho más.',
+    },
+    alternates: {
+        canonical: '/',
+    },
+};
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+interface HomePageProps {
+    searchParams?: {
+        page?: string;
+    };
+}
+
+export default async function Home({ searchParams }: HomePageProps) {
+    // Paginación
+    const currentPage = Number(searchParams?.page) || 1;
+    const postsPerPage = 9;
+    const allPosts = await getAllPosts();
+  
+    // Calcular posts para la página actual
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const endIndex = startIndex + postsPerPage;
+    const posts = allPosts.slice(startIndex, endIndex);
+  
+    // Información de paginación
+    const totalPages = Math.ceil(allPosts.length / postsPerPage);
+    const hasNextPage = currentPage < totalPages;
+    const hasPrevPage = currentPage > 1;
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      
+            {/* Posts Section */}
+            <section 
+                className="container mx-auto px-4 py-16"
+                aria-labelledby="recent-posts-heading"
+            >
+                <header className="text-center mb-12">
+                    <h1 
+                        id="recent-posts-heading"
+                        className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4"
+                    >
+                        Artículos Recientes
+                    </h1>
+                    <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        Explora nuestros últimos artículos sobre noticias, eventos y mucho más
+                    </p>
+          
+                    {/* Información de paginación */}
+                    {totalPages > 1 && (
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                            Página {currentPage} de {totalPages} - {allPosts.length} artículos en total
+                        </p>
+                    )}
+                </header>
+
+                {/* Posts Grid */}
+                {posts.length > 0 ? (
+                    <>
+                        <div 
+                            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+                            role="feed"
+                            aria-label="Lista de artículos recientes"
+                        >
+                            {posts.map((post) => (
+                                <article key={post.slug} >
+                                    <PostCard post={post} />
+                                </article>
+                            ))}
+                        </div>
+
+                        {/* Paginación */}
+                        {totalPages > 1 && (
+                            <nav 
+                                className="flex justify-center items-center gap-4 mt-12"
+                                aria-label="Navegación de páginas"
+                            >
+                                {hasPrevPage && (
+                                    <Link
+                                        href={currentPage === 2 ? '/' : `/?page=${currentPage - 1}`}
+                                        className="px-4 py-2 text-orange-600 dark:text-orange-400 border border-orange-300 dark:border-orange-600 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                                        aria-label="Página anterior"
+                                    >
+                                        Anterior
+                                    </Link>
+                                )}
+                
+                                <span 
+                                    className="px-4 py-2 bg-orange-600 text-white rounded-lg"
+                                    aria-current="page"
+                                >
+                                    {currentPage}
+                                </span>
+                
+                                {hasNextPage && (
+                                    <Link
+                                        href={`/?page=${currentPage + 1}`}
+                                        className="px-4 py-2 text-orange-600 dark:text-orange-400 border border-orange-300 dark:border-orange-600 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                                        aria-label="Página siguiente"
+                                    >
+                                        Siguiente
+                                    </Link>
+                                )}
+                            </nav>
+                        )}
+                    </>
+                ) : (
+                    <EmptyState />
+                )}
+            </section>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
+}
+
+// Componente para estado vacío
+function EmptyState() {
+    return (
+        <div className="text-center py-12">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                No hay artículos disponibles
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+                Pronto publicaremos contenido interesante. ¡Vuelve pronto!
+            </p>
+        </div>
+    );
 }

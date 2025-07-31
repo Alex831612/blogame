@@ -1,36 +1,238 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 BloGame - Blog de Videojuegos
 
-## Getting Started
+Un blog moderno y minimalista sobre videojuegos, construido con Next.js 14 y diseñado para ofrecer la mejor experiencia tanto a lectores como desarrolladores.
 
-First, run the development server:
+[![Vercel](https://img.shields.io/badge/deployed%20on-vercel-black?style=for-the-badge&logo=vercel)](https://blogame.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
+## 🌐 Demo
+
+**Sitio web:** [https://blogame.vercel.app](https://blogame.vercel.app)
+
+## ✨ Características
+
+### 🎯 Funcionalidades Principales
+- **Blog completo** con sistema de posts y categorías
+- **Páginas estáticas** optimizadas (About, Contact)
+- **Formulario de contacto** funcional con Formspree
+- **Búsqueda** integrada de contenido
+- **Modo oscuro/claro** con persistencia
+- **Diseño responsive** mobile-first
+
+### 🚀 Rendimiento y SEO
+- **Core Web Vitals optimizados**
+- **SEO completo** con Open Graph y Twitter Cards
+- **JSON-LD** structured data
+- **Sitemap** automático
+- **Robots.txt** configurado
+- **Google Analytics** integrado
+
+### ♿ Accesibilidad
+- **WCAG 2.1 AA** compliant
+- **Skip links** para navegación por teclado
+- **Alt text** en todas las imágenes
+- **Contraste** optimizado
+- **Screen reader** friendly
+
+### 🛠️ Tecnología
+- **Next.js 15** con App Router
+- **TypeScript** para type safety
+- **Tailwind CSS** para styling
+- **MDX** para contenido
+- **Vercel** para deployment
+
+
+## 🚀 Inicio Rápido
+
+### Prerrequisitos
+- Node.js 18+
+- npm o yarn
+
+### Instalación
+
+1. **Clonar el repositorio**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/tu-usuario/blogame.git
+cd blogame
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Instalar dependencias**
+```bash
+npm install
+# o
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Configurar variables de entorno**
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Edita `.env.local` con tus configuraciones:
+```env
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+FORMSPREE_ID=tu-formspree-id
+```
 
-## Learn More
+4. **Ejecutar en desarrollo**
+```bash
+npm run dev
+# o
+yarn dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. **Abrir en el navegador**
+```
+http://localhost:3000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Gestión de Contenido
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Crear un nuevo post
 
-## Deploy on Vercel
+1. Crea un archivo `.md` en `posts/`:
+```bash
+/posts/mi-nuevo-post.md
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Agrega el frontmatter:
+```md
+---
+title: "Mi Nuevo Post"
+description: "Descripción del post"
+date: "2024-01-15"
+category: "Curiosidades"
+image: "/images/posts/mi-post.jpg"
+tags: ["gaming", "review"]
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Mi Nuevo Post
+
+Contenido del post en Markdown...
+```
+
+### Categorías disponibles
+- `curiosidades` - Datos de juegos
+- `noticias` - Noticias gaming
+- `guias` - Guías y tutoriales
+- `analisis` - Análisis en profundidad
+- `tecnogia` - Análisis en consolas
+
+## 🎨 Personalización
+
+### Configuración del sitio
+Edita `app/layout.tsx` para modificar:
+- Metadata del sitio
+- Open Graph tags
+- Información de contacto
+
+## 📊 Analytics y SEO
+
+### Google Analytics
+1. Crea una propiedad GA4
+2. Agrega el ID en `.env.local`
+3. Los eventos se trackean automáticamente:
+   - Page views
+   - Cambios de tema
+   - Envíos de formulario
+
+### SEO
+- **Sitemap automático**: `/sitemap.xml`
+- **Robots.txt**: `/robots.txt`
+- **JSON-LD**: Structured data en cada página
+- **Open Graph**: Imágenes y metadatos optimizados
+
+## 🚀 Deployment
+
+### Vercel (Recomendado)
+1. Conecta tu repositorio GitHub
+2. Configura las variables de entorno
+3. Deploy automático en cada push
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/tu-usuario/blogame)
+
+### Otros proveedores
+- **Netlify**: Compatible con build command `npm run build`
+- **Railway**: Docker support incluido
+- **Self-hosted**: Usa `npm run build && npm run start`
+
+## 🛠️ Scripts Disponibles
+
+```bash
+npm run dev          # Desarrollo
+npm run build        # Build para producción
+npm run start        # Servidor de producción
+npm run lint         # Linting con ESLint
+npm run type-check   # Verificación de tipos
+npm run analyze      # Análisis del bundle
+```
+
+## 🧪 Testing
+
+```bash
+npm run test         # Tests unitarios
+npm run test:e2e     # Tests end-to-end
+npm run test:coverage # Coverage report
+```
+
+## 🤝 Contribuciones
+
+¡Las contribuciones son bienvenidas! Por favor:
+
+1. Fork el proyecto
+2. Crea tu feature branch (`git checkout -b feature/nueva-caracteristica`)
+3. Commit tus cambios (`git commit -m 'Add: nueva característica'`)
+4. Push al branch (`git push origin feature/nueva-caracteristica`)
+5. Abre un Pull Request
+
+### Guías de contribución
+- Usa TypeScript para nuevos componentes
+- Sigue las convenciones de naming existentes
+- Agrega tests para nuevas funcionalidades
+- Actualiza la documentación
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 👤 Autor
+
+**Alex**
+- Website: [https://blogame.vercel.app](https://blogame.vercel.app)
+- Email: andresalex983@gmail.com
+- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+
+## 🙏 Agradecimientos
+
+- [Next.js](https://nextjs.org/) - Framework React
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
+- [Vercel](https://vercel.com/) - Platform de deployment
+- [Formspree](https://formspree.io/) - Servicio de formularios
+- Comunidad gaming por la inspiración
+
+---
+
+⭐ **Si te gusta este proyecto, dale una estrella en GitHub** ⭐
+
+## 📋 Roadmap
+
+### 🔄 En progreso
+- [ ] Newsletter subscription
+- [ ] Comentarios con sistema propio
+- [ ] PWA completa
+- [ ] Modo offline
+
+### 🎯 Próximas features
+- [ ] Sistema de tags avanzado
+- [ ] Búsqueda con filtros
+- [ ] Integración con APIs de gaming
+- [ ] Dashboard de administración
+- [ ] Multi-idioma (en/es)
+
+### 🚀 Ideas futuras
+- [ ] Integración con Twitch/YouTube
+- [ ] Sistema de puntuaciones
+- [ ] Comparador de juegos
