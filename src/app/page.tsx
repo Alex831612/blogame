@@ -25,15 +25,9 @@ export const metadata: Metadata = {
     },
 };
 
-interface HomePageProps {
-    searchParams?: {
-        page?: string;
-    };
-}
-
-export default async function Home({ searchParams }: HomePageProps) {
+export default async function Home({ params }: { params: { page?: string } }) {
     // Paginación
-    const currentPage = Number(searchParams?.page) || 1;
+    const currentPage = Number(params?.page) || 1;
     const postsPerPage = 9;
     const allPosts = await getAllPosts();
   

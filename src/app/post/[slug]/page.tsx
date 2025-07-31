@@ -7,7 +7,7 @@ import { getPostBySlug, markdownToHtml, getAllPosts, getRelatedPosts } from '@/l
 import ShareButtons from '@/components/ShareButtons';
 import PostCard from '@/components/PostCard';
 
-// Generar metadata para SEO { params: { slug: string } }): Promise<Metadata>
+// Generar metadata para SEO
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata>
 {
     const post = getPostBySlug(params.slug);
