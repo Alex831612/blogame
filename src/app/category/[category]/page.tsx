@@ -4,12 +4,6 @@ import Link from 'next/link';
 import { getPostsByCategory, getAllCategories } from '@/lib/posts';
 import PostCard from '@/components/PostCard';
 
-interface CategoryPageProps {
-    params: {
-        category: string;
-    };
-}
-
 // Generar metadata para SEO
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
 
@@ -42,7 +36,8 @@ export async function generateMetadata({ params }: { params: { category: string 
     };
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
+export default function CategoryPage({ params }: { params: { category: string } })
+{
     const decodedCategory = decodeURIComponent(params.category);
     const posts = getPostsByCategory(decodedCategory);
   

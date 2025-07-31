@@ -7,14 +7,9 @@ import { getPostBySlug, markdownToHtml, getAllPosts, getRelatedPosts } from '@/l
 import ShareButtons from '@/components/ShareButtons';
 import PostCard from '@/components/PostCard';
 
-interface PostPageProps {
-    params: {
-        slug: string;
-    };
-}
-
-// Generar metadata para SEO
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+// Generar metadata para SEO { params: { slug: string } }): Promise<Metadata>
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata>
+{
     const post = getPostBySlug(params.slug);
     
     if (!post) {
@@ -66,7 +61,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     };
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+export default async function PostPage({ params }: { params: { slug: string } }) {
     const post = getPostBySlug(params.slug);
   
     if (!post) {
