@@ -11,7 +11,8 @@ interface CategoryPageProps {
 }
 
 // Generar metadata para SEO
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
+
     const decodedCategory = decodeURIComponent(params.category);
     const posts = getPostsByCategory(decodedCategory);
     
@@ -125,7 +126,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                 </div>
 
                 <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-                    {posts.map((post, index) => (
+                    {posts.map((post) => (
                         <article
                             key={post.slug}
                         >
