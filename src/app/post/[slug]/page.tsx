@@ -23,7 +23,7 @@ export async function generateMetadata({
         };
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://mi-blog.com';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bloggame.vercel.app/';
     const postUrl = `${baseUrl}/post/${post.slug}`;
 
     return {

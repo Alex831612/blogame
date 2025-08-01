@@ -54,7 +54,7 @@ export default async function tagPage({
     }
 
     // Safeguard: usar el primer post para obtener el nombre de categoría
-    const tagName = posts[0]?.tags || decodedtag;
+    const tagName = decodedtag;
     const articleCount = posts.length;
     const articlesText = articleCount === 1 ? 'artículo' : 'artículos';
 

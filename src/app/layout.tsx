@@ -17,7 +17,7 @@ const inter = Inter({
 
 // Metadata completa para SEO
 export const metadata: Metadata = {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://blogame.vercel.app'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://bloggame.vercel.app/'),
     title: {
         template: '%s | BloGame - Blog de Videojuegos',
         default: 'BloGame - Blog de Videojuegos',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         'Nintendo',
         'PC gaming'
     ],
-    authors: [{ name: 'Alex', url: 'https://blogame.vercel.app/about' }],
+    authors: [{ name: 'Alex', url: 'https://bloggame.vercel.app/about' }],
     creator: 'Alex - BloGame',
     publisher: 'BloGame',
     formatDetection: {
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'es_ES',
-        url: 'https://blogame.vercel.app',
+        url: 'https://bloggame.vercel.app/',
         siteName: 'BloGame',
         title: 'BloGame - Blog de Videojuegos',
         description: 'Tu blog favorito sobre videojuegos, reviews, análisis y noticias del mundo gaming.',
@@ -86,9 +86,9 @@ export const metadata: Metadata = {
         // yahoo: 'tu-codigo-yahoo',
     },
     alternates: {
-        canonical: 'https://blogame.vercel.app',
+        canonical: 'https://bloggame.vercel.app/',
         languages: {
-            'es-ES': 'https://blogame.vercel.app',
+            'es-ES': 'https://bloggame.vercel.app/',
         },
         types: {
             'application/rss+xml': [

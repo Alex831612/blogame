@@ -37,7 +37,7 @@ export default function Footer(){
                             <a href="#">
                                 <X size={24} />
                             </a>
-                            <a href="#">
+                            <a href="https://github.com/Alex831612/blogame">
                                 <Github size={24} />
                             </a>
                             <a href="#">

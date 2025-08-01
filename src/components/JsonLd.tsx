@@ -1,5 +1,5 @@
 export default function JsonLd() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://blogame.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bloggame.vercel.app';
     
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -45,7 +45,7 @@ export default function JsonLd() {
             name: 'Alex',
             url: `${baseUrl}/about`,
             sameAs: [
-                // Enlaces a perfiles del autor
+                // Enlaces a perfil del autor
             ],
         },
         mainEntity: {

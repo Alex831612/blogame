@@ -1,15 +1,15 @@
-# 🎮 BloGame - Blog de Videojuegos
+# BloGame - Blog de Videojuegos
 
 Un blog moderno y minimalista sobre videojuegos, construido con Next.js 15 y diseñado para ofrecer la mejor experiencia tanto a lectores como desarrolladores.
 
-[![Vercel](https://img.shields.io/badge/deployed%20on-vercel-black?style=for-the-badge&logo=vercel)](https://blogame.vercel.app)
+[![Vercel](https://img.shields.io/badge/deployed%20on-vercel-black?style=for-the-badge&logo=vercel)](https://bloggame.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 ## 🌐 Demo
 
-**Sitio web:** [https://blogame.vercel.app](https://blogame.vercel.app)
+**Sitio web:** [https://bloggame.vercel.app](https://bloggame.vercel.app)
 
 ## ✨ Características
 
@@ -44,7 +44,7 @@ Un blog moderno y minimalista sobre videojuegos, construido con Next.js 15 y dis
 - **Next.js 15** con App Router
 - **TypeScript** para type safety
 - **Tailwind CSS** para styling
-- **MDX** para contenido
+- **Markdown** para contenido
 - **Vercel** para deployment
 
 ## 🚀 Inicio Rápido
@@ -59,7 +59,7 @@ Un blog moderno y minimalista sobre videojuegos, construido con Next.js 15 y dis
 1. **Clonar el repositorio**
 
 ```bash
-git clone https://github.com/tu-usuario/blogame.git
+git clone https://github.com/Alex831612/blogame
 cd blogame
 ```
 
@@ -164,19 +164,13 @@ Edita `app/layout.tsx` para modificar:
 
 ## 🚀 Deployment
 
-### Vercel (Recomendado)
+### Vercel
 
 1. Conecta tu repositorio GitHub
 2. Configura las variables de entorno
 3. Deploy automático en cada push
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/tu-usuario/blogame)
-
-### Otros proveedores
-
-- **Netlify**: Compatible con build command `npm run build`
-- **Railway**: Docker support incluido
-- **Self-hosted**: Usa `npm run build && npm run start`
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Alex831612/blogame)
 
 ## 🛠️ Scripts Disponibles
 
@@ -222,17 +216,9 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 **Alex**
 
-- Website: [https://blogame.vercel.app](https://blogame.vercel.app)
+- Website: [https://bloggame.vercel.app](https://bloggame.vercel.app)
 - Email: andresalex983@gmail.com
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
-
-## 🙏 Agradecimientos
-
-- [Next.js](https://nextjs.org/) - Framework React
-- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
-- [Vercel](https://vercel.com/) - Platform de deployment
-- [Formspree](https://formspree.io/) - Servicio de formularios
-- Comunidad gaming por la inspiración
+- GitHub: [@Alex831612](https://github.com/Alex831612)
 
 ---
 
@@ -240,23 +226,10 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 ## 📋 Roadmap
 
-### 🔄 En progreso
+### Ideas futuras
 
 - [ ] Newsletter subscription
 - [ ] Comentarios con sistema propio
 - [ ] PWA completa
 - [ ] Modo offline
-
-### 🎯 Próximas features
-
-- [ ] Sistema de tags avanzado
-- [ ] Búsqueda con filtros
-- [ ] Integración con APIs de gaming
 - [ ] Dashboard de administración
-- [ ] Multi-idioma (en/es)
-
-### 🚀 Ideas futuras
-
-- [ ] Integración con Twitch/YouTube
-- [ ] Sistema de puntuaciones
-- [ ] Comparador de juegos
