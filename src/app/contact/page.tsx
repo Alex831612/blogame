@@ -1,8 +1,16 @@
 'use client'
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+
+// Definir la interfaz para los datos del formulario
+interface FormData {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+}
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
         subject: '',
@@ -12,7 +20,7 @@ export default function Contact() {
     const [submitted, setSubmitted] = useState(false)
     const [error, setError] = useState('')
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -21,7 +29,7 @@ export default function Contact() {
         if (error) setError('')
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setIsSubmitting(true)
         setError('')
@@ -255,13 +263,13 @@ export default function Contact() {
                                     <textarea
                                         id="message"
                                         name="message"
-                                        rows="6"
+                                        rows={6}
                                         required
                                         value={formData.message}
                                         onChange={handleChange}
                                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                                         placeholder="Cuéntame sobre tu proyecto, pregunta o colaboración..."
-                                    ></textarea>
+                                    />
                                 </div>
 
                                 <button

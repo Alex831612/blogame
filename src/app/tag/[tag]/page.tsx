@@ -4,15 +4,14 @@ import Link from 'next/link';
 import { getAllTags, getPostsByTag } from '@/lib/posts';
 import PostCard from '@/components/PostCard';
 
-interface TagPageProps {
-    params: {
-        tag: string;
-    };
-}
-
 // Generar metadata para SEO
-export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
-    const decodedtag = decodeURIComponent(params.tag);
+export async function generateMetadata({
+    params 
+}: {
+    params: Promise<{ tag: string }>
+}) : Promise<Metadata> {
+    const { tag } = await params;
+    const decodedtag = decodeURIComponent(tag);
     const posts = getPostsByTag(decodedtag);
     
     if (posts.length === 0) {
@@ -22,7 +21,7 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
         };
     }
 
-    const tagName = posts[0]?.tag || decodedtag;
+    const tagName = posts[0]?.tags || decodedtag;
     const articleCount = posts.length;
     const articlesText = articleCount === 1 ? 'artículo' : 'artículos';
 
@@ -41,8 +40,13 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
     };
 }
 
-export default function tagPage({ params }: TagPageProps) {
-    const decodedtag = decodeURIComponent(params.tag);
+export default async function tagPage({ 
+    params
+}: {
+    params: Promise<{ tag: string }>
+}) { 
+    const { tag } = await params;
+    const decodedtag = decodeURIComponent(tag);
     const posts = getPostsByTag(decodedtag);
   
     if (posts.length === 0) {
@@ -50,7 +54,7 @@ export default function tagPage({ params }: TagPageProps) {
     }
 
     // Safeguard: usar el primer post para obtener el nombre de categoría
-    const tagName = posts[0]?.tag || decodedtag;
+    const tagName = posts[0]?.tags || decodedtag;
     const articleCount = posts.length;
     const articlesText = articleCount === 1 ? 'artículo' : 'artículos';
 
@@ -125,7 +129,7 @@ export default function tagPage({ params }: TagPageProps) {
                 </div>
 
                 <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-                    {posts.map((post, index) => (
+                    {posts.map((post) => (
                         <article
                             key={post.slug}
                         >

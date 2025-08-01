@@ -25,9 +25,18 @@ export const metadata: Metadata = {
     },
 };
 
-export default async function Home({ params }: { params: { page?: string } }) {
-    // Paginación
-    const currentPage = Number(params?.page) || 1;
+export default async function Home({ 
+    params 
+}: { 
+    params?: Promise<{ page?: string }> 
+}) {
+    // Paginación - manejar el caso donde params puede ser undefined
+    let currentPage = 1;
+    if (params) {
+        const resolvedParams = await params;
+        currentPage = Number(resolvedParams?.page) || 1;
+    }
+
     const postsPerPage = 9;
     const allPosts = await getAllPosts();
   

@@ -5,9 +5,13 @@ import { getPostsByCategory, getAllCategories } from '@/lib/posts';
 import PostCard from '@/components/PostCard';
 
 // Generar metadata para SEO
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-
-    const decodedCategory = decodeURIComponent(params.category);
+export async function generateMetadata({ 
+    params 
+}: { 
+    params: Promise<{ category: string }> 
+}): Promise<Metadata> {
+    const { category } = await params;
+    const decodedCategory = decodeURIComponent(category);
     const posts = getPostsByCategory(decodedCategory);
     
     if (posts.length === 0) {
@@ -36,9 +40,13 @@ export async function generateMetadata({ params }: { params: { category: string 
     };
 }
 
-export default function CategoryPage({ params }: { params: { category: string } })
-{
-    const decodedCategory = decodeURIComponent(params.category);
+export default async function CategoryPage({ 
+    params 
+}: { 
+    params: Promise<{ category: string }> 
+}) {
+    const { category } = await params;
+    const decodedCategory = decodeURIComponent(category);
     const posts = getPostsByCategory(decodedCategory);
   
     if (posts.length === 0) {
@@ -167,15 +175,12 @@ export default function CategoryPage({ params }: { params: { category: string } 
 }
 
 // Generar parámetros estáticos para todas las categorías
-export async function generateStaticParams(): Promise<{ params: { category: string } }[]> {
+export async function generateStaticParams(): Promise<{ category: string }[]> {
     const categories = getAllCategories();
 
     return categories.map((category) => ({
-        params: {
-            category: encodeURIComponent(category.toLowerCase()),
-        },
+        category: encodeURIComponent(category.toLowerCase()),
     }));
 }
 
-
-export const revalidate = 3600; 
+export const revalidate = 3600;
